@@ -1,22 +1,26 @@
 const cookie = document.getElementById("cookie");
 const clicker__counter = document.getElementById("clicker__counter");
-let clicker_number = Number(clicker__counter.textContent);
-const clicker__speed = document.getElementById("clicker__speed");
-let clicker_speed = Number(clicker__speed.textContent);
-let currentTime = new Date().getSeconds();
+let clicker_number = 0;
+let clicker__speed = document.getElementById("clicker__speed");
+let clicker_speed = 0;
+let startTime = null;
 
-  cookie.onclick = function() {
+cookie.onclick = function() {
     clicker_number++;
-    let time = new Date().getSeconds();
     clicker__counter.textContent = clicker_number;
-    cookie.width = 400;
-   if(clicker_number % 2 === 0){
-       cookie.width = 250;
-   } else {
-     cookie.width = 200;
-   }
-let difference = time - currentTime;
-clicker__speed.textContent = 1/ difference;
+    const now = new Date();
+    if (clicker_number % 2 === 0) {
+        cookie.width = 250;
+    } else {
+        cookie.width = 200;
+    }
+    if (startTime === null) {
+        clicker_speed = 0;
+    } else {
+        let difference = (now - startTime) / 1000;
+        clicker_speed = 1 / difference;
+        clicker__speed.textContent = clicker_speed.toFixed(2);
 
-  }
-
+    }
+    startTime = now;
+}

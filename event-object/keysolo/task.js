@@ -19,8 +19,8 @@ class Game {
 
 
     registerEvents() {
-        window.addEventListener('keydown', (event) => {
-            if (event.key.toLowerCase() === this.currentSymbol.textContent.toLowerCase()) {
+        window.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === this.currentSymbol.textContent.toLowerCase()) {
                 this.success()
             } else {
                 this.fail();
@@ -39,25 +39,21 @@ class Game {
             return;
         }
 
-        this.winsElement.textContent = Number(this.winsElement.textContent) + 1;
-
-        if (Number(this.winsElement.textContent) === 10) {
+        if (++this.winsElement.textContent === 10) {
             alert('Победа!');
             this.reset();
-        } else {
+            return;
+        } 
             this.setNewWord();
-        }
     }
 
     fail() {
-        this.lossElement.textContent = Number(this.lossElement.textContent) + 1;
-
-        if (Number(this.lossElement.textContent) === 5) {
+        if (++this.lossElement.textContent === 5) {
             alert('Вы проиграли!');
             this.reset();
-        } else {
+            return;
+        } 
             this.setNewWord();
-        }
     }
 
     setNewWord() {
@@ -103,8 +99,8 @@ class Game {
     setTimer() {
         this.clearTimer();
         this.intervalId = setInterval(() => {
-            this.timer.textContent = Number(this.timer.textContent) - 1;
-            if (Number(this.timer.textContent) < 0) {
+            this.timer.textContent -= 1;
+            if (this.timer.textContent < 0) {
                 this.clearTimer();
                 this.fail();
             }

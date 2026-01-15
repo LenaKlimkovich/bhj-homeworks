@@ -37,6 +37,7 @@ function countdown() {
             secondsLeft--;
             seconds.textContent = secondsLeft;
         }
+
         if (hoursLeft < 10) {
             hours.textContent = '0' + hoursLeft;
         }

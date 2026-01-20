@@ -1,10 +1,11 @@
-const fontSizes = Array.from(document.querySelectorAll('.font-size'));
+
 const bookControl = document.querySelector('.book__control');
+const fontSizes = Array.from(bookControl.querySelectorAll('.font-size'));
 const bookContent = document.querySelector('.book__content');
 const bookColor = document.querySelector('.book__control_color');
 const fontColors = Array.from(bookColor.querySelectorAll('.color'));
 const bookBg = document.querySelector('.book__control_background');
-const BgColors = Array.from(bookBg.querySelectorAll('.color'));
+const bgColors = Array.from(bookBg.querySelectorAll('.color'));
 
 bookControl.addEventListener("click", (e) => {
     e.preventDefault();
@@ -44,7 +45,7 @@ bookBg.addEventListener("click", (e) => {
     const active = e.target.closest('.color');
 
     if (!active) return;
-    BgColors.forEach((b) => b.classList.remove('color_active'));
+    bgColors.forEach((b) => b.classList.remove('color_active'));
     active.classList.add('color_active');
     bookContent.classList.remove('book_bg-gray', 'book_bg-black');
     if (active.classList.contains("bg_color_black")) {

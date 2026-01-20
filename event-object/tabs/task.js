@@ -1,10 +1,12 @@
-const tabs = Array.from(document.querySelectorAll('.tab'));
-const activeTab = document.querySelector('.tab_active');
-const activeIndex = tabs.indexOf(activeTab);
-const contents = Array.from(document.querySelectorAll('.tab__content'));
 
+const tabsBlocks = Array.from(document.querySelectorAll('.tabs'));
 
-document.addEventListener('click', (e) => {
+tabsBlocks.forEach((b) => {
+    const activeTab = b.querySelector('.tab_active');
+    const tabs = Array.from(b.querySelectorAll('.tab'));
+    let activeIndex = tabs.indexOf(activeTab);
+    const contents = Array.from(b.querySelectorAll('.tab__content'));
+    b.addEventListener('click', (e) => {
     const tab = e.target.closest('.tab');
     let newIndex = tabs.indexOf(tab)
     tabs.forEach(t =>
@@ -14,6 +16,6 @@ document.addEventListener('click', (e) => {
     contents[newIndex].classList.add('tab__content_active');
     activeIndex = newIndex;
 });
-
+});
 
 

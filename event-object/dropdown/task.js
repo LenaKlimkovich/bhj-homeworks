@@ -14,7 +14,7 @@ dropdowns.forEach((dropdown) => {
     }
 
     function unrollList() {
-        list.classList.add("dropdown__list_active");
+        list.classList.toggle("dropdown__list_active");
     }
 
     value.addEventListener("click", unrollList);

@@ -53,7 +53,7 @@ btn.forEach(b => {
             const copyPhoto = photo.cloneNode(true);
             copyPhoto.classList.add('copy-photo');
             document.body.appendChild(copyPhoto);
-            
+
             const photoRect = photo.getBoundingClientRect();
             const cartRect = cartImage.getBoundingClientRect();
 
@@ -66,12 +66,12 @@ btn.forEach(b => {
             const targetX = cartRect.left;
             const targetY = cartRect.top;
 
-            const dx = (targetX - currentX) / 15;
-            const dy = (targetY - currentY) / 15;
+            const stepX = (targetX - currentX) / 15;
+            const stepY = (targetY - currentY) / 15;
 
             let intervalId = setInterval(() => {
-                copyPhoto.style.left = currentX + dx + 'px';
-                copyPhoto.style.top = currentY + dy + 'px';
+                copyPhoto.style.left = currentX + stepX + 'px';
+                copyPhoto.style.top = currentY + stepY + 'px';
                 currentX = parseFloat(copyPhoto.style.left);
                 currentY = parseFloat(copyPhoto.style.top);
 
@@ -83,18 +83,11 @@ btn.forEach(b => {
             return;
         }
 
-        const cartItem = document.createElement("div");
-        cart.appendChild(cartItem);
-        cartItem.classList.add('cart__product');
-        cartItem.dataset.id = targetProduct.dataset.id;
-        const cartImg = document.createElement("img");
-        cartItem.appendChild(cartImg);
-        cartImg.classList.add('cart__product-image');
-        cartImg.src = targetProduct.querySelector('.product__image').src;
-        const productCount = document.createElement('div');
-        cartItem.appendChild(productCount);
-        productCount.classList.add('cart__product-count');
-        productCount.textContent = quantity.textContent;
-
+        cart.insertAdjacentHTML('afterbegin', `
+  <div class="cart__product" data-id="${targetProduct.dataset.id}">
+    <img src="${targetProduct.querySelector('.product__image').src}" class="cart__product-image">
+    <div class="cart__product-count">${quantity.textContent}</div>
+  </div>
+`);
     })
 })

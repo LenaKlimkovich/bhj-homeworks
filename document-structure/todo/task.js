@@ -1,27 +1,27 @@
 const taskInput = document.getElementById('task__input');
 const taskList = document.getElementById('tasks__list');
+const btnAdd = document.getElementById('tasks__add');
+
+
+btnAdd.addEventListener('click', event => {
+    event.preventDefault();
+})
 
 taskInput.addEventListener('keydown', event => {
-    if (taskInput.value.trim() !== '' && event.code === 'Enter') {
+    if (event.code === 'Enter') {
         event.preventDefault();
 
-        const task = document.createElement('div');
-        task.classList.add('task');
+        taskList.insertAdjacentHTML('afterbegin', `
+<div class="task">
+  <div class="task__title">
+    ${taskInput.value}
+  </div>
+  <a href="#" class="task__remove">&times;</a>
+</div>
+`);
 
-        const taskTitle = document.createElement('div');
-        taskTitle.textContent = taskInput.value;
-        taskTitle.classList.add('task__title');
-
-        const taskRemove = document.createElement('a');
-        taskRemove.classList.add('task__remove');
-        taskRemove.href = '#';
-        taskRemove.innerHTML = '&times;';
-        
-
-        task.appendChild(taskTitle);
-        task.appendChild(taskRemove);
-        taskList.appendChild(task);
-
+        const taskRemove = document.querySelector('.task__remove');
+        const task = document.querySelector('.task');
         taskRemove.addEventListener('click', e => {
             e.preventDefault();
             task.remove();
@@ -29,5 +29,3 @@ taskInput.addEventListener('keydown', event => {
         taskInput.value = '';
     }
 })
-  
-

@@ -2,15 +2,9 @@ const taskInput = document.getElementById('task__input');
 const taskList = document.getElementById('tasks__list');
 const btnAdd = document.getElementById('tasks__add');
 
-
-btnAdd.addEventListener('click', event => {
-    event.preventDefault();
-})
-
-taskInput.addEventListener('keydown', event => {
-    if (event.code === 'Enter') {
-        event.preventDefault();
-
+btnAdd.addEventListener('click', (e) => {
+e.preventDefault();
+if(taskInput.value.trim('') !== ''){
         taskList.insertAdjacentHTML('afterbegin', `
 <div class="task">
   <div class="task__title">
@@ -28,4 +22,5 @@ taskInput.addEventListener('keydown', event => {
         })
         taskInput.value = '';
     }
-})
+}
+)

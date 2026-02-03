@@ -43,5 +43,9 @@
 
 .welcome_active {
   display: block;
-  text-align: center;
+  text-align: left;
+}
+
+#exit {
+  margin-top: 20px;
 }
